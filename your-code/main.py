@@ -218,6 +218,8 @@ except ValueError:
 # Handle this exception using try and except blocks. 
 # You will probably need to import sys 
 
+import sys
+
 def linux_interaction():
     try:
         assert ('linux' in sys.platform), "Function can only run on Linux systems."
@@ -234,22 +236,37 @@ def linux_interaction():
 # Hint: we need to continually keep checking until we get an integer.
 # Use a while loop with a try,except, else block to account for incorrect inputs.
 
-
-
+while True:
+    try:
+        integer = int(input("Please provide an integer: "))
+        print(integer)
+        break
+    except ValueError:
+        print("You didn't provided an integer.")
+    
 
 # 22. Find all of the numbers from 1-1000 that are divisible by any single digit besides 1 (2-9). 
 # Use results as the name of the list 
 
 results = []
 
-[results.append(n) for n in range(1,1000)]
+# I understand that you want every number that can be divided by any number between 2 or 9. Not all the numbers that can be divided by all of them (2-9)
+for div in range(2,10):
+    [results.append(n) for n in range(1,1000) if n % div == 0]
 
+print(set(results))
 
 # 23. Define a customised exception to handle not accepted values. 
 # You have the following user inputs and the Num_of_sections can not be less than 2.
 # Hint: Create a class derived from the pre-defined Exception class in Python
 
+class NewException(Exception):
+    pass
+
 Total_Marks = int(input("Enter Total Marks Scored: ")) 
 Num_of_Sections = int(input("Enter Num of Sections: "))
 
+if Num_of_Sections < 2:
+    raise NewException("Number of sections cannot be less than 2.")
 
+# I didn't understand what else do i need to do with "Total_Marks" input :S 
